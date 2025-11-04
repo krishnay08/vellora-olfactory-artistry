@@ -4,34 +4,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PerfumeCard from "@/components/PerfumeCard";
 import heroImage from "@/assets/hero-perfume.jpg";
-import nuitDoudImage from "@/assets/nuit-doud.jpg";
-import amberSultanImage from "@/assets/amber-sultan.jpg";
-import velvetRoseImage from "@/assets/velvet-rose.jpg";
+import { perfumes } from "@/data/perfumes";
 
 const Index = () => {
-  const perfumes = [
-    {
-      id: "nuit-doud",
-      name: "Nuit d'Oud",
-      description: "A midnight journey through a forest of aged agarwood and smoky leather",
-      image: nuitDoudImage,
-      price: 450,
-    },
-    {
-      id: "amber-sultan",
-      name: "Amber Sultan",
-      description: "The warmth of ancient amber meets the richness of golden saffron",
-      image: amberSultanImage,
-      price: 420,
-    },
-    {
-      id: "velvet-rose",
-      name: "Velvet Rose",
-      description: "Rose de Grasse absolute enveloped in the finest Bulgarian rose oil",
-      image: velvetRoseImage,
-      price: 480,
-    },
-  ];
+  // Display the first 3 signature perfumes
+  const signaturePerfumes = perfumes.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
@@ -81,7 +58,7 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {perfumes.map((perfume, index) => (
+            {signaturePerfumes.map((perfume, index) => (
               <div 
                 key={perfume.id} 
                 className="animate-fade-in" 

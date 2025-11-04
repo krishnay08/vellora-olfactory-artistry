@@ -3,69 +3,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PerfumeCard from "@/components/PerfumeCard";
 import { Button } from "@/components/ui/button";
-import nuitDoudImage from "@/assets/nuit-doud.jpg";
-import amberSultanImage from "@/assets/amber-sultan.jpg";
-import velvetRoseImage from "@/assets/velvet-rose.jpg";
+import { perfumes, families, getPerfumesByFamily } from "@/data/perfumes";
 
 const Collection = () => {
   const [selectedFamily, setSelectedFamily] = useState<string>("All");
 
-  const perfumes = [
-    {
-      id: "nuit-doud",
-      name: "Nuit d'Oud",
-      description: "A midnight journey through a forest of aged agarwood and smoky leather",
-      image: nuitDoudImage,
-      price: 450,
-      family: "Oud",
-    },
-    {
-      id: "amber-sultan",
-      name: "Amber Sultan",
-      description: "The warmth of ancient amber meets the richness of golden saffron",
-      image: amberSultanImage,
-      price: 420,
-      family: "Amber",
-    },
-    {
-      id: "velvet-rose",
-      name: "Velvet Rose",
-      description: "Rose de Grasse absolute enveloped in the finest Bulgarian rose oil",
-      image: velvetRoseImage,
-      price: 480,
-      family: "Floral",
-    },
-    {
-      id: "oud-imperial",
-      name: "Oud Imperial",
-      description: "The rarest Cambodian oud meets precious Indian sandalwood",
-      image: nuitDoudImage,
-      price: 550,
-      family: "Oud",
-    },
-    {
-      id: "jasmine-noir",
-      name: "Jasmine Noir",
-      description: "Night-blooming jasmine sambac with dark patchouli and vanilla",
-      image: velvetRoseImage,
-      price: 460,
-      family: "Floral",
-    },
-    {
-      id: "sandalwood-mystique",
-      name: "Sandalwood Mystique",
-      description: "Mysore sandalwood oil, aged cedar, and smoky incense",
-      image: nuitDoudImage,
-      price: 440,
-      family: "Woody",
-    },
-  ];
-
-  const families = ["All", "Oud", "Floral", "Woody", "Amber"];
-
-  const filteredPerfumes = selectedFamily === "All" 
-    ? perfumes 
-    : perfumes.filter(p => p.family === selectedFamily);
+  const filteredPerfumes = getPerfumesByFamily(selectedFamily);
 
   return (
     <div className="min-h-screen bg-background">

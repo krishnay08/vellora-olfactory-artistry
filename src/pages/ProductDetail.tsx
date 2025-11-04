@@ -1,29 +1,36 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import nuitDoudImage from "@/assets/nuit-doud.jpg";
+import { getPerfumeById } from "@/data/perfumes";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [selectedSize, setSelectedSize] = useState<"50ml" | "100ml">("50ml");
 
-  // Mock product data (would normally fetch based on id)
+  const perfume = getPerfumeById(id || "");
+
+  // If perfume not found, redirect to collection
+  if (!perfume) {
+    return <Navigate to="/collection" replace />;
+  }
+
+  // Product data with pricing structure
   const product = {
-    name: "Nuit d'Oud",
-    tagline: "The Darkest Oud, Illuminated",
-    description: "Born from the ancient forests of Cambodia, Nuit d'Oud is a meditation on darkness and light. The rarest agarwood oil, aged for decades, meets the brightness of Persian saffron in a dance of shadow and radiance. This is not merely a fragrance—it is a journey into the sublime.",
-    image: nuitDoudImage,
+    name: perfume.name,
+    tagline: "An Olfactory Masterpiece",
+    description: `${perfume.description}. Each bottle represents hundreds of hours of meticulous craftsmanship, from sourcing the world's finest raw materials to the final aging process. This is not merely a fragrance—it is an experience, a memory, a work of art.`,
+    image: perfume.image,
     prices: {
-      "50ml": 450,
-      "100ml": 750,
+      "50ml": perfume.price,
+      "100ml": Math.round(perfume.price * 1.65),
     },
     notes: {
-      top: ["Saffron", "Bergamot"],
-      heart: ["Turkish Rose", "Cambodian Oud"],
-      base: ["Leather", "Sandalwood", "Amber"],
+      top: ["Bergamot", "Saffron"],
+      heart: ["Rose Absolute", "Precious Woods"],
+      base: ["Amber", "Musk", "Vanilla"],
     },
   };
 
